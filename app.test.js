@@ -1,6 +1,11 @@
-const assert = require('assert');
+// app.test.js
+const request = require('supertest');
+const app = require('./app');
 
-// Simulated test
-assert.strictEqual(1 + 1, 2, 'Math still works ✅');
-
-console.log('All tests passed 🚀');
+describe('GET /', () => {
+  it('should return greeting message', async () => {
+    const res = await request(app).get('/');
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toContain('Hello from Node.js app');
+  });
+});
